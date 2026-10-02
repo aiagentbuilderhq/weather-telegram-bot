@@ -1,0 +1,9 @@
+{
+  "name": "Weather API \u2192 Telegram Bot \u2014 Any API \u2192 Telegram",
+  "description": "HTTP Request to OpenWeatherMap API (or any REST API) \u2192 Telegram Bot API",
+  "modules": [
+    "HTTP: Make a Request (OpenWeatherMap API / Any REST API)",
+    "Telegram: Send a Message (Telegram Bot API)"
+  ],
+  "note": "Replace YOUR_API_KEY, YOUR_BOT_TOKEN with your own. Example URL: https://api.openweathermap.org/data/2.5/weather?q=Lagos&appid=YOUR_API_KEY&units=metric"
+}
