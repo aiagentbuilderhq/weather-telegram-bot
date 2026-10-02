@@ -1,80 +1,80 @@
-# Project 2: Weather API → Telegram Bot
+# Project 2: Weather API → Telegram Bot (Any API → Any Destination — Make.com + n8n + MCP)
 
-> **One-liner:** Daily Lagos weather delivered to Telegram automatically — my first API integration, foundation for all API automations.
+> **One-liner:** Daily weather + any API data delivered to Telegram automatically — my first API integration, foundation for Shopify, Stripe, HubSpot, and any REST API. Built for Make.com AND n8n.
 
-[![OpenWeatherMap](https://img.shields.io/badge/API-OpenWeatherMap-orange)](https://openweathermap.org/api)
-[![Telegram](https://img.shields.io/badge/Telegram-Bot_API-blue)](https://core.telegram.org/bots)
+[![OpenWeatherMap API](https://img.shields.io/badge/API-OpenWeatherMap-orange)](https://openweathermap.org/api)
+[![Telegram Bot API](https://img.shields.io/badge/Telegram%20Bot%20API-Bot-blue)](https://core.telegram.org/bots)
 [![Make.com](https://img.shields.io/badge/Make.com-Automation-blue)](https://make.com)
+[![n8n](https://img.shields.io/badge/n8n-Workflow-red)](https://n8n.io)
+[![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-purple)](https://modelcontextprotocol.io)
+[![Webhooks](https://img.shields.io/badge/Webhooks-HTTP%20%2F%20JSON-orange)](https://en.wikipedia.org/wiki/Webhook)
+
+**Live Hub:** [automation-portfolio](https://github.com/aiagentbuilderhq/automation-portfolio) | **Other Projects:** [Sheets → Gmail](https://github.com/aiagentbuilderhq/sheets-gmail-automation) · [Form → Slack](https://github.com/aiagentbuilderhq/form-slack-leads) · [AI Inbox](https://github.com/aiagentbuilderhq/ai-inbox-assistant) · [Lead Scoring](https://github.com/aiagentbuilderhq/ai-lead-scoring)
 
 ## 🎯 Problem
-Learning APIs is intimidating. Most beginners never move past Sheets → Email. This project proves API handling is simple and repeatable — critical for client work where every integration is an API.
+Learning APIs is intimidating. Most beginners never move past Sheets → Email. This project proves API handling is simple and repeatable — critical for client work where 80% of automations are API integrations (Shopify, Stripe, HubSpot, etc.).
 
-## ✅ Solution
-3-step Make.com scenario:
-1. **HTTP Request** — GET `https://api.openweathermap.org/data/2.5/weather?q=Lagos&appid=YOUR_KEY&units=metric`
-2. **Parse JSON** — Extract temp, feels_like, humidity, description
-3. **Telegram Send Message** — Formatted weather alert to private channel/bot
+## ✅ Solution — API → Telegram Pattern (Works for Any API)
+
+**Core Pattern (Same for Make.com and n8n):**
+1. **HTTP Request Node** — GET `https://api.openweathermap.org/data/2.5/weather?q=Lagos&appid=YOUR_KEY&units=metric` → Returns JSON
+2. **Parse JSON / Set Node** — Extract temp, humidity, description
+3. **Telegram Send Message** — Formatted alert via Telegram Bot API
+
+**Why This Matters:** Replace OpenWeatherMap URL with Shopify API (`/admin/api/orders.json`), Stripe API (`/v1/charges`), HubSpot API (`/crm/v3/objects/contacts`) — same nodes, different URL. That's why founders hire API specialists.
+
+**MCP Angle:** This workflow follows MCP principles — Model (API) → Context (JSON parsing) → Protocol (Telegram delivery). MCP is what advanced AI agents use to talk to tools.
 
 ## 🏗️ Architecture
 
 ```
-[HTTP: Make a Request - OpenWeatherMap API]
+Make.com:
+[HTTP: Make a Request - OpenWeatherMap API / Any REST API]
         ↓
-[Telegram: Send a Message]
-Message: 🌤 Weather in Lagos — Temp: {{temp}}°C — Feels like: {{feels_like}}°C — Humidity: {{humidity}}% — Condition: {{description}}
-        ↓
-[Schedule: Every Day 7:00 AM]
+[Telegram: Send a Message — Telegram Bot API]
+Message: 🌤 Weather in Lagos — Temp: {{temp}}°C — Humidity: {{humidity}}% — Condition: {{description}}
+
+n8n:
+[Schedule Trigger: Every Day 7 AM] → [HTTP Request: GET API] → [Set Node: Format Message] → [Telegram Node: Send Message]
 ```
-
-## 📸 Screenshots (Add Yours)
-
-- `scenario.png` — HTTP + Telegram modules
-- `telegram-message.png` — Telegram chat showing weather message
-- `api-key-page.png` — OpenWeatherMap API key page (BLUR YOUR KEY)
 
 ## 📈 Results
 
-- **Learning Outcome:** APIs = menus. You ask, it serves JSON. Once understood, any API is automatable.
+- **Learning Outcome:** APIs = URL + Key + Method → JSON. Once understood, any API is automatable.
 - **Build Time:** 20 minutes
-- **Use Cases Unlocked:** Any API → Any destination (e-commerce orders, CRM updates, Slack alerts)
-- **Reliability:** Runs daily at 7 AM, zero manual effort
+- **Use Cases Unlocked:** Shopify New Order → Slack, Stripe Payment → Sheets, HubSpot Contact → Gmail, Any API → Any destination
+- **Reliability:** Runs daily at 7 AM via Cron/Scheduling
 
-## 🛠️ Tools Used
+## 🛠️ Tools Used — Founder-Searched Skills
 
-- OpenWeatherMap API (Free tier — 1,000 calls/day)
-- Telegram Bot API (Free forever)
-- Make.com (Free tier)
+- **APIs:** OpenWeatherMap API (Free) · Telegram Bot API (Free) · HTTP / REST APIs · JSON Parsing · Webhooks
+- **Automation:** Make.com (Free) · n8n (Free self-host) · Scheduling / Cron
+- **Advanced:** MCP (Model Context Protocol) pattern · Error Handling · Retry Logic
 - **Running Cost:** $0/month
+- **Translation to Client Work:** "Weather is demo — your Shopify, Stripe, HubSpot, Notion, Airtable — same pattern, different API endpoint"
 
 ## 🎥 Demo Video
 
 **YouTube Unlisted Link:** `[Paste Link Here]`
 
-**Demo Script (30 sec):**
-- 0-5s: "Weather Bot — API → Telegram"
-- 5-25s: Show Make.com scenario → Click Run Once → Show Telegram message arriving instantly
-- 25-30s: "Built with Make.com + OpenWeatherMap — saves manual checking daily"
+**Demo Script:** Show Make.com scenario → Run Once → Telegram message arrives → Show n8n version → Show how swapping URL to Shopify API works
 
-## 🚀 How To Replicate
+## 🚀 How To Replicate — Any API
 
-1. openweathermap.org → Sign Up Free → API Keys → Copy Key (save privately, never commit)
-2. Telegram → Search @BotFather → /newbot → Name: MyWeatherBot → Username: must end with bot → Copy Token (save privately)
-3. Search @userinfobot → Start → Copy your Chat ID
-4. Make.com → New Scenario → HTTP → Make a Request → URL: `https://api.openweathermap.org/data/2.5/weather?q=Lagos&appid=YOUR_API_KEY&units=metric` → Method: GET
-5. Add Telegram → Send Message → Create Connection → Paste Bot Token → Chat ID: your ID → Message Text: template above
-6. Schedule: Click clock icon → Every day 7:00 AM → Save → Turn ON
-7. Test: Run Once → Check Telegram
+1. Get API key (OpenWeatherMap, Shopify, Stripe — any)
+2. Make.com: HTTP → Make a Request → URL: API endpoint → Method: GET → Headers: Authorization if needed
+3. n8n: HTTP Request node → Same
+4. Telegram: BotFather → /newbot → Copy Token → Telegram node → Chat ID → Message template
+5. Schedule: Cron / Every day 7 AM
+6. Test: Run Once → Check Telegram
 
-## 🔒 Security — READ THIS
+**Client Pitch:** "If it has an API, I can connect it. Weather is just the demo. Your CRM, e-commerce, payment processor — same nodes, different URL. I work with both Make.com and n8n, so I build in your existing stack."
 
-- **NEVER** upload your real API key or bot token to GitHub
-- In screenshots, blur keys with Canva or phone markup
-- In blueprint.json, replace keys with `YOUR_API_KEY` and `YOUR_BOT_TOKEN`
-- Public repos leak secrets within hours — bots scan GitHub constantly
+## 🔒 Security
 
-## 📄 Case Study
-
-See `case-study.md`
+- NEVER upload real API key or bot token
+- Blur keys in screenshots
+- Replace with `YOUR_API_KEY` in blueprint.json
 
 ---
-**Built by Isaac — aiagentbuilderhq | [Full Portfolio](https://github.com/aiagentbuilderhq/automation-portfolio)**
+**Built by Isaac — aiagentbuilderhq | [Full Portfolio Hub](https://github.com/aiagentbuilderhq/automation-portfolio) | Tech: Make.com + n8n + MCP + Any REST API + Telegram Bot API + Webhooks**
